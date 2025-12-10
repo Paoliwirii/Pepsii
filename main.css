@@ -19,7 +19,6 @@ body {
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
 }
 
 /* CADA PANTALLA (SECCIÓN) */
@@ -803,3 +802,4 @@ body.loaded .loader-content {
         margin-top: 10px;
     }
 }
+
