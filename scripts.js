@@ -46,4 +46,23 @@
             }, 1500); // Espera a que termine la animación del telón
             
         }, 1500); // Tiempo que dura el logo palpitando antes de abrirse
+
     });
+
+// Seleccionamos todos los enlaces que apuntan a una sección (empiezan con #)
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault(); // Evita el salto brusco predeterminado
+
+        const targetId = this.getAttribute('href'); // Obtiene el ID (#inicio, etc)
+        const targetSection = document.querySelector(targetId);
+
+        if (targetSection) {
+            // Hacemos scroll suave usando JS, que es más consistente
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
