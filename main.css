@@ -1,0 +1,805 @@
+/* =========================================
+   1. RESET Y ESTRUCTURA BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    background-color: black;
+    overflow: hidden; 
+}
+
+/* EL CONTENEDOR MÁGICO (SCROLL SNAP) */
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+/* CADA PANTALLA (SECCIÓN) */
+.full-section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    
+    /* ESTA ES LA CLAVE: Obliga a parar en cada sección, sin saltos */
+    scroll-snap-stop: always; 
+    
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================================
+   2. VIDEOS DE FONDO
+   ========================================= */
+.section-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.video-mobile-only {
+    display: none;
+}
+
+.video-desktop-only {
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =========================================
+   3. ELEMENTOS DE LA PRIMERA SECCIÓN
+   ========================================= */
+.main-header h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    z-index: 5;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.hero-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 100%;
+    height: auto;
+    padding: 0;
+    z-index: 1; 
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.hero-image img {
+    max-height: 60vh;
+    width: auto;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+}
+
+/* =========================================
+   4. BARRA DE NAVEGACIÓN (DOCK)
+   ========================================= */
+.bottom-nav {
+    position: fixed; 
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; 
+    max-width: 800px;
+    height: 60px;     
+    background-color: #0b1d8f;
+    border: 3px solid white;
+    padding: 0 20px;
+    border-radius: 40px;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 1;            
+    text-align: center; 
+    z-index: 21;        
+}
+
+.nav-center-item {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible; 
+}
+
+.can-link {
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    /* Aseguramos que el enlace tenga el tamaño de la imagen */
+    width: fit-content; 
+    margin: 0 auto; /* Centrado por si acaso */
+}
+
+/* EL PARCHE MÁGICO V2 (Más robusto) */
+.can-link::after {
+    content: '';
+    position: absolute;
+    
+    /* Centramos el parche respecto a la lata */
+    top: 50%;
+    left: 50%;
+    
+    /* Definimos el tamaño: 120% del ancho y alto de la lata */
+    width: 140%; 
+    height: 140%;
+    
+    /* Lo movemos para que su centro coincida con el centro de la lata */
+    transform: translate(-50%, -50%);
+    
+    background-color: transparent; /* Ponle 'rgba(255,0,0,0.3)' para ver si funciona y luego lo quitas */
+    z-index: 90;
+    cursor: pointer;
+    border-radius: 50%; /* Opcional: forma circular */
+}
+
+
+.can-wrapper {
+    position: relative;
+    bottom: -50px; 
+    transition: transform 0.3s ease;
+    z-index: 25; 
+}
+
+.can-wrapper img {
+    height: 120px; 
+    width: auto;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+}
+
+.nav-label {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: white;
+    position: relative;
+    top: 50px; 
+    z-index: 26;
+    text-shadow: 0 2px 4px black;
+}
+
+.nav-center-item:hover .can-wrapper {
+    transform: translateY(-5px);
+}
+
+/* =========================================
+   5. PUNTOS LATERALES (MODIFICADO)
+   ========================================= */
+.side-nav {
+    position: fixed;
+    /* Antes 20px, ahora 40px para moverlo a la izquierda */
+    right: 40px; 
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Más espacio entre puntos */
+    z-index: 30; 
+}
+
+.side-nav a {
+    display: block; 
+}
+
+.dot {
+    /* Antes 8px, ahora más grandes */
+    width: 10px; 
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4); /* Semitransparente inactivo */
+    border: 2px solid transparent; 
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: white;
+    border-color: white;
+    transform: scale(1.5); /* Crece al activarse */
+    box-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+
+/* =========================================
+   6. SECCIÓN 2: TIENDA (SCROLL FIXED)
+   ========================================= */
+.shop-section {
+    background-color: transparent; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.shop-section .overlay {
+    background-color: rgba(11, 29, 143, 0.45); 
+    backdrop-filter: blur(2px);
+    z-index: 1; 
+}
+
+/* CONTENEDOR PRINCIPAL MODIFICADO PARA CAPTURAR SCROLL */
+.shop-container {
+    width: 100%;      /* Ocupa todo el ancho */
+    max-width: none;  /* Quitamos límite para que el mouse sirva en los bordes */
+    height: 100vh;
+    overflow-y: auto; 
+    scrollbar-width: none;
+    
+    display: flex;    /* Usamos flex column para organizar el contenido */
+    flex-direction: column;
+    
+    padding: 80px 0 120px 0; /* Padding vertical, quitamos horizontal aquí */
+    position: relative; 
+    z-index: 2; 
+}
+.shop-container::-webkit-scrollbar { display: none; }
+
+/* REGLA NUEVA: Centra el contenido dentro del contenedor full-width */
+.shop-container > * {
+    width: 100%;
+    max-width: 1100px; /* Aquí limitamos el contenido, no el contenedor */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* --- 6.1 HERO SUPERIOR --- */
+.top-hero {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; 
+    align-items: center;
+    border-radius: 20px;
+    /* Margen abajo para separar del grid */
+    margin-bottom: 40px; 
+}
+
+.hero-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+    z-index: 5;
+}
+
+.texto1 {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    line-height: 1;
+    color: white;
+}
+
+.texto2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #ccc;
+}
+
+.hero-promo-img {
+    max-width: 80%;
+    width: 800px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #0b1d8f; 
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 30px;
+    border: 2px solid white;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: #0b1d8f;
+    transform: scale(1.05);
+}
+
+.hero-big-image {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-big-image img {
+    max-height: 800px; 
+    width: auto;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+}
+
+/* --- 6.2 GRID PRODUCTOS --- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    /* width 100% ya lo hereda de la regla general */
+}
+
+.product-card {
+    border: 2px solid white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255,255,255,0.05);
+    min-height: 300px;
+}
+
+.card-image {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image img {
+    max-height: 140px;
+    transition: transform 0.3s;
+}
+
+.product-card:hover .card-image img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.btn-small {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 15px;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.btn-small:hover {
+    background-color: #0b1d8f;
+    border-color: #0b1d8f;
+}
+
+/* =========================================
+   7. MEDIA QUERIES (MÓVIL Y TABLET)
+   ========================================= */
+/* ARREGLO TABLET V2 (MÁS AMPLIO Y ESPECÍFICO) */
+@media screen and (max-height: 1100px) {
+    
+    /* 1. EL TÍTULO: Más chico y pegado arriba */
+    .main-header h1 {
+        font-size: 1.8rem !important; /* Forzamos tamaño */
+        margin-top: 5vh !important;   /* Usamos % de pantalla */
+    }
+
+    /* 2. LA LATA GIGANTE: Reducirla drásticamente */
+    .hero-image img {
+        max-height: 50vh !important; /* Mucho más pequeña */
+        width: auto;
+    }
+    
+    /* Centramos bien el contenedor de la imagen */
+    .hero-image {
+        top: 45%; /* La subimos un poco (antes 50%) */
+        transform: translate(-50%, -50%);
+    }
+
+}
+
+
+@media screen and (max-width: 1024px) {
+    .top-hero {
+        grid-template-columns: 1fr 1fr;
+    }
+    .texto1 { font-size: 2.5rem; }
+    .hero-big-image img { max-height: 600px; }
+}
+
+@media screen and (max-width: 768px) {
+    /* === 1. VIDEOS EN MÓVIL === */
+    .video-desktop-only { display: none; }
+    .video-mobile-only { display: block; }
+
+    .rotate-mobile {
+        position: absolute;
+        top: 50%; 
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        width: 100vh; 
+        height: 100vw;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    /* === 2. AJUSTES GENERALES (HEADER Y NAV) === */
+    .main-header h1 {
+        font-size: 1.5rem;
+        margin-top: 20px;
+    }
+
+    .hero-image {
+        top: 50%; left: 50%;
+        transform: translate(-50%, -60%);
+    }
+
+    .hero-image img {
+        max-height: 55vh;
+    }
+
+    .bottom-nav {
+        bottom: 30px;
+        width: 90%;
+        height: 40px;
+        padding: 0 10px;
+    }
+
+    .can-wrapper { bottom: 5px; }
+    .can-wrapper img { height: 90px; }
+    .nav-label { top: 0px; font-size: 0.6rem; }
+    .nav-link { font-size: 0.6rem; }
+    
+    /* Puntos laterales un poco más pegados al borde */
+    .side-nav {
+        right: 15px;
+    }
+
+    /* === 3. TIENDA / SHOP EN MÓVIL === */
+    .shop-container {
+        padding: 80px 0 140px 0; /* Padding vertical */
+    }
+
+    /* --- HERO SUPERPOSICIÓN (LO QUE PEDISTE) --- */
+    .top-hero {
+        display: flex;
+        /* Reverse: pone primero la imagen (que en HTML es 2do) y luego el texto */
+        flex-direction: column-reverse; 
+        align-items: center;
+        text-align: center;
+        gap: 0; /* Sin espacio, nosotros lo controlamos */
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    /* A. LA FIGURA (FONDO) */
+    .hero-big-image {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 1; /* Nivel 1 (atrás) */
+        margin-bottom: 0;
+    }
+
+    .hero-big-image img {
+        height: 480px; /* Hacemos al personaje alto para que luzca */
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    /* B. EL LOGO Y TEXTO (FRENTE) */
+    .hero-text-content {
+        width: 100%;
+        z-index: 10; /* Nivel 10 (adelante) */
+        
+        /* AQUÍ ESTÁ EL TRUCO: Margen negativo para subir */
+        margin-top: -90px; 
+    }
+
+    .hero-promo-img {
+        width: 280px; /* Logo grande */
+        max-width: 90%;
+        /* Sombra negra fuerte para que se separe visualmente del personaje */
+        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.9)); 
+    }
+
+    .texto2 {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        text-shadow: 0 2px 5px black; /* Sombra al texto por si queda sobre algo claro */
+    }
+
+    .btn-primary {
+        margin-top: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+    }
+
+    /* --- GRID DE PRODUCTOS --- */
+    .products-grid {
+        grid-template-columns: 1fr 1fr; /* 2 columnas */
+        gap: 15px;
+    }
+
+    .product-card {
+        padding: 15px;
+        min-height: 250px;
+    }
+    
+    .btn-small {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main-header h1 { font-size: 1.2rem; }
+    .bottom-nav { width: 95%; height: 60px; padding: 0 5px; }
+    .nav-link { font-size: 0.5rem; }
+    .can-wrapper img { height: 80px; }
+    .products-grid { grid-template-columns: 1fr; } /* 1 columna en pantallas muy chicas */
+}
+
+
+/* =========================================
+   8. PANTALLA DE CARGA (LOADER)
+   ========================================= */
+
+/* El contenedor principal que tapa todo */
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* ¡Por encima de todo! */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Para que al terminar no estorbe el click */
+}
+
+/* Las dos mitades del telón negro */
+.curtain-panel {
+    position: absolute;
+    top: 0;
+    width: 50%; /* Cada una ocupa la mitad */
+    height: 100%;
+    background-color: black;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); /* Movimiento suave estilo "telón" */
+    z-index: 1; /* Detrás del logo */
+}
+
+.left-panel {
+    left: 0;
+}
+
+.right-panel {
+    right: 0;
+}
+
+/* El contenedor del logo (para que esté encima del negro) */
+.loader-content {
+    position: relative;
+    z-index: 2; /* Encima del telón */
+    transition: opacity 0.5s ease; /* Para que desaparezca suavemente */
+}
+
+/* La imagen del logo y su animación */
+.pepsi-pulse {
+    width: 100px; /* Ajusta el tamaño a tu gusto */
+    animation: latido 1s infinite ease-in-out;
+}
+
+/* Animación de hacerse grande y pequeño */
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); } /* Crece */
+    100% { transform: scale(1); }
+}
+
+/* === ESTADO FINAL (Cuando se abre el telón) === */
+/* Esta clase se agrega con JS */
+body.loaded .left-panel {
+    transform: translateX(-100%); /* Se va a la izquierda */
+}
+
+body.loaded .right-panel {
+    transform: translateX(100%); /* Se va a la derecha */
+}
+
+body.loaded .loader-content {
+    opacity: 0; /* El logo desaparece */
+}
+
+/* =========================================
+   9. SECCIÓN 3: REGISTRO (NEWSLETTER)
+   ========================================= */
+
+.register-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Imagen de fondo que cubre todo */
+.register-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
+
+.register-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Llena la pantalla sin deformarse */
+}
+
+/* La tarjeta blanca central */
+.register-card {
+    background-color: white;
+    width: 90%;
+    max-width: 700px; /* Ancho máximo similar a la imagen */
+    padding: 60px 50px;
+    border-radius: 20px;
+    text-align: left; /* Textos alineados a la izquierda */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    
+    /* Para que no se encime con la barra de navegación de abajo */
+    margin-bottom: 50px; 
+}
+
+/* Títulos */
+.reg-title {
+    color: #0025ff; /* Azul Pepsi eléctrico */
+    font-weight: 900;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.reg-subtitle {
+    color: #0025ff;
+    font-weight: 900;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+/* Texto pequeño negro */
+.reg-instruction {
+    color: black;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+/* Formulario */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea elementos a la izquierda */
+    width: 100%;
+}
+
+.newsletter-form input {
+    width: 50%; /* Ocupa la mitad del ancho aprox */
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #0025ff; /* Texto azul al escribir */
+    font-size: 1rem;
+    text-transform: uppercase;
+    background: transparent;
+}
+
+.newsletter-form input::placeholder {
+    color: #ccc; /* Gris claro para el placeholder */
+}
+
+/* La línea negra debajo del input */
+.input-line {
+    width: 50%;
+    height: 3px;
+    background-color: black;
+    margin-bottom: 30px;
+}
+
+/* Botón Siguiente */
+.btn-submit {
+    background-color: #0025ff; /* Azul Pepsi */
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    align-self: flex-end; /* Mueve el botón a la derecha */
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-submit:hover {
+    transform: scale(1.05);
+    background-color: #0018a8; /* Un poco más oscuro al hover */
+}
+
+/* === AJUSTES RESPONSIVE PARA ESTA SECCIÓN === */
+@media screen and (max-width: 768px) {
+    .register-card {
+        padding: 40px 20px;
+        text-align: center; /* En móvil centramos todo */
+        width: 85%;
+    }
+
+    .reg-title, .reg-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .newsletter-form {
+        align-items: center; /* Centramos form en móvil */
+    }
+
+    .newsletter-form input, .input-line {
+        width: 100%; /* Input ancho completo en móvil */
+        text-align: center;
+    }
+    
+    .btn-submit {
+        align-self: center; /* Botón centrado en móvil */
+        width: 100%;
+        margin-top: 10px;
+    }
+}
