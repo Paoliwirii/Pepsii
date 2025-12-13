@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a Mundo Pepsi</title>
+    
+    <link rel="icon" type="image/svg+xml" href="Img/PepsiIcon.svg"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+    <!-- === A. LOADER === -->
+    <div id="loader-wrapper">
+        <div class="curtain-panel left-panel"></div>
+        <div class="curtain-panel right-panel"></div>
+        <div class="loader-content">
+            <img src="Img/PepsiIcon.svg" alt="Cargando..." class="pepsi-pulse">
+        </div>
+    </div>
+
+    <!-- === B. NAVEGACIÓN LATERAL === -->
+    <div class="side-nav">
+        <a href="#inicio" class="dot active"></a>
+        <a href="#colaboraciones" class="dot"></a>
+        <a href="#registro" class="dot"></a>
+    </div>
+
+    <!-- === C. CONTENEDOR PRINCIPAL === -->
+    <div class="scroll-container">
+
+        <!-- 1. SECCIÓN INICIO -->
+        <section id="inicio" class="full-section">
+            <video autoplay muted loop playsinline class="section-bg-video video-desktop-only">
+                <source src="Vids/background-pepsi-website-desktop-op.mp4" type="video/mp4">
+            </video>
+
+            <video autoplay muted loop playsinline class="section-bg-video video-mobile-only">
+                <source src="Vids/background-pepsi-website-mobile-op.mp4" type="video/mp4">
+            </video>
+
+            <div class="overlay"></div>
+
+            <div class="container"> 
+                <header class="main-header">
+                    <h1>UN SITIO PARA<br>TODOS LOS QUE TIENEN<br>SED DE MÁS</h1>
+                </header>
+
+                <div class="hero-image">
+                    <img src="Img/pepsi-can-small.png" alt="Pepsi Principal">
+                </div>
+
+                <nav class="bottom-nav">
+                    <a href="#colaboraciones" class="nav-link">COLABORACIONES</a>
+                    <div class="nav-center-item">
+                        <a href="#inicio" class="can-link">
+                            <div class="can-wrapper">
+                                <img src="Img/logo-menu-pepsi.svg" alt="Inicio">
+                            </div>
+                        </a>
+                        <span class="nav-label">INICIO</span>
+                    </div>
+                    <a href="#registro" class="nav-link">REGISTRATE</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- 2. SECCIÓN COLABORACIONES (TIENDA) -->
+        <section id="colaboraciones" class="full-section shop-section">
+            <video autoplay muted loop playsinline class="section-bg-video rotate-mobile">
+                <source src="Vids/graphic_no_globe_I.mp4" type="video/mp4">
+            </video>
+            
+            <div class="overlay"></div>
+
+            <div class="shop-container">
+                <!-- Hero Superior -->
+                <div class="top-hero">
+                    <div class="hero-text-content">
+                        <img src="Img/logo pepsi_agita tu mundo.svg" alt="Promo Pepsi" class="hero-promo-img">
+                        <h3 class="texto2">FIGURA COLECCIONABLE</h3>
+                        
+                        <div class="hero-product-card">
+                            <h3 style="display:none;">Escultura Pepsi</h3> 
+                            <p class="product-price-special">$30.00</p>
+                            <div class="action-container-hero" style="width: 200px; margin: 20px auto;">
+                                <a href="#" class="btn-primary add-to-cart-btn" 
+                                   data-name="Escultura Pepsi" 
+                                   data-price="30.00" 
+                                   data-img="Img/placeholder1.jpg"
+                                   data-max-qty="1">
+                                   AÑADIR AL CARRO
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-big-image">
+                        <img src="Img/Hero.png" alt="Pepsi Grande">
+                    </div>
+                </div>
+
+                <!-- Grid de Productos -->
+                <div class="products-grid">
+                    <!-- P1 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/botella 1.5L.png" alt="Producto 1">
+                        </div>
+                        <h3>Botella 1.5L</h3>
+                        <p class="product-price">$1.25</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Botella 1.5L" 
+                           data-price="1.25" 
+                           data-img="Img/Productos/botella 1.5L.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P2 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/botella 600ml.png" alt="Producto 2">
+                        </div>
+                        <h3>Botella 600ml</h3>
+                        <p class="product-price">$0.75</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Botella 600ml" 
+                           data-price="0.75" 
+                           data-img="Img/Productos/botella 600ml.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P3 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/lata 335ml.png" alt="Producto 3">
+                        </div>
+                        <h3>Lata 335ml</h3>
+                        <p class="product-price">$0.75</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Lata 335ml" 
+                           data-price="0.75" 
+                           data-img="Img/Productos/lata 335ml.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P4 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/sixpack latas 335ml.png" alt="Producto 4">
+                        </div>
+                        <h3>Sixpack latas 335ml</h3>
+                        <p class="product-price">$3.99</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Sixpack latas 335ml" 
+                           data-price="3.99" 
+                           data-img="Img/Productos/sixpack latas 335ml.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P5 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/libretitas.png" alt="Producto 5">
+                        </div>
+                        <h3>Libreta de bolsillo (A6)</h3>
+                        <p class="product-price">$3.50</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Libreta de bolsillo (A6)" 
+                           data-price="3.50" 
+                           data-img="Img/Productos/libretitas.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P6 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/lapicero.png" alt="Producto 6">
+                        </div>
+                        <h3>Lapicero</h3>
+                        <p class="product-price">$1.25</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Lapicero" 
+                           data-price="1.25" 
+                           data-img="Img/Productos/lapicero.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P7 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/llavero redondo.png" alt="Producto 7">
+                        </div>
+                        <h3>Llavero redondo</h3>
+                        <p class="product-price">$2.50</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Llavero redondo" 
+                           data-price="2.50" 
+                           data-img="Img/Productos/llavero redondo.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P8 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/imanes.png" alt="Producto 8">
+                        </div>
+                        <h3>Imanes</h3>
+                        <p class="product-price">$3.00</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Imanes" 
+                           data-price="3.00" 
+                           data-img="Img/Productos/imanes.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                    <!-- P9 -->
+                    <div class="product-card">
+                        <div class="card-image">
+                            <img src="Img/Productos/sticker.png" alt="Producto 9">
+                        </div>
+                        <h3>Stickers</h3>
+                        <p class="product-price">$1.00</p>
+                        <a href="#" class="btn-small add-to-cart-btn" 
+                           data-name="Stickers" 
+                           data-price="1.00" 
+                           data-img="Img/Productos/sticker.png">
+                           AGREGAR
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SECCIÓN REGISTRO -->
+        <section id="registro" class="full-section register-section">
+            <div class="register-bg">
+                <img src="Img/fondo.jpeg" alt="Fondo Newsletter">
+            </div>
+
+            <div class="register-card">
+                <h2 class="reg-title">SÉ EL PRIMERO EN ENTERARTE</h2>
+                <h3 class="reg-subtitle">DE CONCIERTOS, PROMOCIONES Y EXPERIENCIAS.</h3>
+                
+                <p class="reg-instruction">EMPEZAMOS CON TU CORREO PARA TENERTE INFORMADO</p>
+                
+                <form class="newsletter-form">
+                    <input type="email" placeholder="EJ:CORREO@DIRECCION.COM" required>
+                    <div class="input-line"></div>
+                    <button type="submit" class="btn-submit">SIGUIENTE</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- === D. CARRITO FLOTANTE Y PANEL === -->
+    <div id="cart-icon-container">
+        <div class="cart-badge" id="cart-count">0</div>
+        <div class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>TU CARRITO</h2>
+            <button id="close-cart" class="close-btn">&times;</button>
+        </div>
+        
+        <div class="cart-items" id="cart-items-container">
+            <!-- Items inyectados por JS -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="btn-primary full-width">PAGAR AHORA</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+    <!-- =========================================
+     MODAL DE PAGO (FINALIZAR COMPRA)
+     ========================================= -->
+<div id="checkout-modal" class="checkout-overlay">
+    <div class="checkout-card">
+        <button id="close-checkout" class="close-btn">&times;</button>
+        
+        <!-- Contenedor del Formulario -->
+        <div id="checkout-form-container">
+            <h2 class="checkout-title">FINALIZAR COMPRA</h2>
+            <p class="checkout-subtitle">Completa tus datos para el envío</p>
+            
+            <form id="payment-form">
+                <!-- Sección 1: Datos de Envío -->
+                <div class="form-section">
+                    <h3>📍 DATOS DE ENVÍO</h3>
+                    
+                    <div class="input-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" id="full-name" placeholder="Ej: Alejandra Flores" required>
+                    </div>
+
+                    <div class="row-inputs">
+                        <div class="input-group">
+                            <label>DUI</label>
+                            <input type="text" id="dui-input" placeholder="00000000-0" maxlength="10" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Celular</label>
+                            <input type="tel" id="phone" placeholder="0000-0000" maxlength="9" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="email" placeholder="cliente@email.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Dirección Exacta</label>
+                        <input type="text" id="address" placeholder="Colonia, Calle, #Casa" required>
+                    </div>
+                </div>
+
+                <!-- Sección 2: Método de Pago -->
+                <div class="form-section payment-section">
+                    <h3>💳 TARJETA DE CRÉDITO / DÉBITO</h3>
+                    <p class="visa-label">Información de Pago</p>
+                    
+                    <div class="input-group">
+                        <input type="text" id="card-num" placeholder="0000 0000 0000 0000" maxlength="19" required class="card-input">
+                    </div>
+
+                    <div class="row-inputs">
+                        <div class="input-group">
+                            <input type="text" id="card-date" placeholder="MM/AA" maxlength="5" required class="center-text">
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="card-cvc" placeholder="CVV" maxlength="3" required class="center-text">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer del Modal -->
+                <div class="checkout-footer">
+                    <div class="total-row">
+                        <span>Total a pagar:</span>
+                        <span id="checkout-total-display">$0.00</span>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">
+                        CONFIRMAR PAGO
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Pantalla de Éxito -->
+        <div id="success-message" class="success-container" style="display: none;">
+            <div class="success-icon">✓</div>
+            <h2>¡PAGO EXITOSO!</h2>
+            <p>Tu pedido ha sido procesado correctamente.</p>
+            <p class="order-detail">Recibirás el comprobante en tu correo.</p>
+            <button id="close-success-btn" class="btn-primary">SEGUIR COMPRANDO</button>
+        </div>
+    </div>
+</div>
+
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
